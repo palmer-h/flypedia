@@ -4,7 +4,7 @@ import { store } from '~redux/store';
 import MainBottomTabNavigator from '~navigators/MainBottomTabNavigator';
 import GlobalErrorBoundary from '~components/GlobalErrorBoundary';
 import { NavigationContainer } from '@react-navigation/native';
-import theme from '~core/appTheme';
+import theme from '~core/appTheme'; // TODO: integrate theme
 
 const App: React.FC = () => {
   return (

@@ -1,31 +1,16 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomeScreen from '~screens/HomeScreen';
-import FliesScreen from '~screens/FliesScreen';
-import ImitateesScreen from '~screens/ImitateesScreen';
+import FavouriteFliesScreen from '~screens/FavouriteFliesScreen';
+import FliesStackNavigator from './FliesStackNavigator';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function MainBottomTabNavigator() {
+const MainBottomTabNavigator = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      activeColor="#f0edf6"
-      inactiveColor="#3e2465"
-      barStyle={{ backgroundColor: '#694fad' }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={24} />
-          ),
-        }}
-      />
+    <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
         name="Flies"
-        component={FliesScreen}
+        component={FliesStackNavigator}
         options={{
           tabBarLabel: 'Flies',
           tabBarIcon: ({ color }) => (
@@ -34,15 +19,17 @@ export default function MainBottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Imitatees"
-        component={ImitateesScreen}
+        name="Favourites"
+        component={FavouriteFliesScreen}
         options={{
-          tabBarLabel: 'Imitatees',
+          tabBarLabel: 'Favourites',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bug" color={color} size={24} />
+            <MaterialCommunityIcons name="heart" color={color} size={24} />
           ),
         }}
       />
     </Tab.Navigator>
   );
-}
+};
+
+export default MainBottomTabNavigator;
