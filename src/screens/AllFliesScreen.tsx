@@ -1,9 +1,9 @@
+import { useCallback, useState } from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import { List, Button, ActivityIndicator } from 'react-native-paper';
 import { useReduxDispatch, useReduxSelector } from '~hooks/redux';
 import FlyListItem from '~components/FlyListItem';
-import { useCallback, useState } from 'react';
 import { fetchPageOfFlies } from '~redux/slices/fliesSlice';
 import { ScrollView } from 'react-native-gesture-handler';
 
