@@ -1,8 +1,8 @@
 import { NavigationProp, Route } from '@react-navigation/native';
-import { View, Text, Share, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Card, List } from 'react-native-paper';
-import FlyDetailsCard from '~components/FlyDetailsCard';
 import { useReduxSelector } from '~hooks/redux';
+import FlyDetailsCard from '~components/FlyDetailsCard';
 
 interface Props {
   route: Route<any>; // Todo type properly!
@@ -14,23 +14,9 @@ const FlyScreen: React.FC<Props> = ({ route }) => {
     state.flies.flies.find(x => x.id === route.params?.id),
   );
 
-  const onFavourite = async () => {
-    // TODO...
-  };
-  const onShare = async () => {
-    await Share.share({
-      message: `Check out this Fly on Flypedia: ${fly.name}`,
-    });
-  };
-
   return (
     <View style={styles.flyScreen}>
-      <FlyDetailsCard
-        fly={fly}
-        onFavourite={() => onFavourite()}
-        onShare={() => onShare()}
-      />
-
+      <FlyDetailsCard fly={fly} />
       <Card mode="elevated" style={styles.imitateesCard}>
         <Card.Title title="Imitatees" titleStyle={styles.imitateesCardTitle} />
         <Card.Content>

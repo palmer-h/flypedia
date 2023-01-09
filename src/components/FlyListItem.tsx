@@ -1,5 +1,9 @@
-import { List, Avatar, ToggleButton } from 'react-native-paper';
-import { Fly } from '~api/fly';
+import { List, Avatar } from 'react-native-paper';
+import { useReduxDispatch, useReduxSelector } from '~hooks/redux';
+import { toggleFlyIsFavourited } from '~redux/slices/userSlice';
+import { Fly } from '~redux/slices/fliesSlice';
+import FavouriteToggleButton from '~components/FavouriteToggleButton';
+import { showSnackbar } from '~redux/slices/uiSlice';
 
 interface Props {
   fly: Fly;
@@ -7,6 +11,19 @@ interface Props {
 }
 
 const FlyListItem: React.FC<Props> = props => {
+  const dispatch = useReduxDispatch();
+  const isFavourited = useReduxSelector(state =>
+    state.user.favouriteFlies.includes(props.fly.id),
+  );
+
+  const handleToggleIsFavourited = (): void => {
+    const favourited = isFavourited;
+    dispatch(toggleFlyIsFavourited(props.fly.id));
+    dispatch(
+      showSnackbar(`${!favourited ? 'Added to' : 'Removed from'} favourites`),
+    );
+  };
+
   return (
     <List.Item
       title={props.fly.name}
@@ -18,7 +35,12 @@ const FlyListItem: React.FC<Props> = props => {
           size={44}
         />
       )}
-      right={() => <ToggleButton value={props.fly.isFavourited} icon="heart" />}
+      right={() => (
+        <FavouriteToggleButton
+          isFavourited={isFavourited}
+          onPress={() => handleToggleIsFavourited()}
+        />
+      )}
       onPress={() => props.onPress(props.fly.id)}
     />
   );

@@ -6,5 +6,5 @@ export interface FlyType {
 }
 
 export const index = () => {
-  return httpHandler.get('/FlyTypes', { headers: { Authorization: false } });
+  return httpHandler.get('/FlyTypes');
 };

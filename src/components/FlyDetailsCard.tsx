@@ -1,14 +1,37 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Share } from 'react-native';
 import { Card, Text, Avatar, Chip, IconButton } from 'react-native-paper';
-import { Fly } from '~api/fly';
+import { useReduxDispatch, useReduxSelector } from '~hooks/redux';
+import { Fly } from '~redux/slices/fliesSlice';
+import FavouriteToggleButton from '~components/FavouriteToggleButton';
+import { toggleFlyIsFavourited } from '~redux/slices/userSlice';
+import { showSnackbar } from '~redux/slices/uiSlice';
 
 interface Props {
   fly: Fly;
   onShare: () => any;
-  onFavourite: () => any;
+  onToggleIsFavourited: () => any;
 }
 
 const FlyDetailsCard: React.FC<Props> = props => {
+  const dispatch = useReduxDispatch();
+  const isFavourited = useReduxSelector(state =>
+    state.user.favouriteFlies.includes(props.fly.id),
+  );
+
+  const handleToggleIsFavourited = () => {
+    const favourited = isFavourited;
+    dispatch(toggleFlyIsFavourited(props.fly.id));
+    dispatch(
+      showSnackbar(`${!favourited ? 'Added to' : 'Removed from'} favourites`),
+    );
+  };
+
+  const handleShare = async () => {
+    await Share.share({
+      message: `Check out this Fly on Flypedia: ${props.fly.name}`,
+    });
+  };
+
   return (
     <View>
       <Card mode="elevated">
@@ -20,17 +43,15 @@ const FlyDetailsCard: React.FC<Props> = props => {
           )}
           right={(p: any) => (
             <View style={styles.flyCardRightButtonsRow}>
-              <IconButton
-                {...p}
-                mode="contained"
-                icon="heart"
-                onPress={() => props.onFavourite()}
+              <FavouriteToggleButton
+                isFavourited={isFavourited}
+                onPress={() => handleToggleIsFavourited()}
               />
               <IconButton
                 {...p}
                 mode="contained"
                 icon="share-variant-outline"
-                onPress={() => props.onShare()}
+                onPress={() => handleShare()}
               />
             </View>
           )}

@@ -1,8 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as flyApi from '~api/fly';
-import { Fly } from '~api/fly';
 import * as flyTypeApi from '~api/flyType';
 import { FlyType } from '~api/flyType';
+import { Imitatee } from '~api/imitatee';
+
+export interface Fly {
+  id: number;
+  name: string;
+  acronym: string;
+  description: string;
+  isFavourited: boolean;
+  types: Array<FlyType>;
+  imitatees: Array<Imitatee>;
+}
 
 interface FliesState {
   flies: Array<Fly>;
@@ -53,11 +63,16 @@ export const fetchPageOfFlies = createAsyncThunk(
       state.flies.metadata.pageNumber,
       state.flies.metadata.pageSize,
     );
+
     // TODO: Handle error
 
-    // TODO: Set 'isFavourite' at this point, based on list of fave Ids in async storage?
+    const favourites = state.user.favouriteFlies;
+    const flies = res.data.results.map(x => ({
+      ...x,
+      isFavourited: favourites.includes(x.id),
+    }));
     return {
-      data: res.data.results,
+      data: flies,
       metadata: res.data.metadata,
     };
   },
