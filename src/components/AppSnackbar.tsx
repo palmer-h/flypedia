@@ -2,7 +2,7 @@ import { Snackbar } from 'react-native-paper';
 import { useReduxDispatch, useReduxSelector } from '~hooks/redux';
 import { dismissSnackbar } from '~redux/slices/uiSlice';
 
-const GlobalSnackbar: React.FC = () => {
+const AppSnackbar: React.FC = () => {
   const dispatch = useReduxDispatch();
   const snackbar = useReduxSelector(state => state.ui.snackbar);
 
@@ -19,4 +19,4 @@ const GlobalSnackbar: React.FC = () => {
   );
 };
 
-export default GlobalSnackbar;
+export default AppSnackbar;

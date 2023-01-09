@@ -19,6 +19,7 @@ export const uiSlice = createSlice({
   initialState,
   reducers: {
     showSnackbar: (state, action: PayloadAction<string>) => {
+      state.snackbar.isVisible = false;
       state.snackbar = {
         isVisible: true,
         message: action.payload,

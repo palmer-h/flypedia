@@ -7,7 +7,7 @@ import { store } from '~redux/store';
 import MainBottomTabNavigator from '~navigators/MainBottomTabNavigator';
 import GlobalErrorBoundary from '~components/GlobalErrorBoundary';
 import theme from '~core/appTheme'; // TODO: integrate theme
-import GlobalSnackbar from '~components/GlobalSnackbar';
+import AppSnackbar from '~components/AppSnackbar';
 
 const persistor = persistStore(store);
 
@@ -19,7 +19,7 @@ const App: React.FC = () => {
           <PaperProvider>
             <NavigationContainer>
               <MainBottomTabNavigator />
-              <GlobalSnackbar />
+              <AppSnackbar />
             </NavigationContainer>
           </PaperProvider>
         </PersistGate>
