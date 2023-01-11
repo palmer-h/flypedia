@@ -16,7 +16,7 @@ const App: React.FC = () => {
     <GlobalErrorBoundary>
       <StoreProvider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <PaperProvider>
+          <PaperProvider theme={theme}>
             <NavigationContainer>
               <MainBottomTabNavigator />
               <AppSnackbar />

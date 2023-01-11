@@ -6,11 +6,13 @@ import AllFliesScreen from '~screens/AllFliesScreen';
 
 const Stack = createStackNavigator();
 
-/* TODO: Integrate custom AppNavbar with correct screen title, & use fly/imitatee name as title for fly/imitatee screens */
-
 const FliesStackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Flies Home">
+    <Stack.Navigator
+      initialRouteName="Flies Home"
+      screenOptions={{
+        header: props => <AppNavbar {...props} />,
+      }}>
       <Stack.Screen
         name="Flies Home"
         component={FliesHomeScreen}

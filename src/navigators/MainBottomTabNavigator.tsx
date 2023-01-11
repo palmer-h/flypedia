@@ -1,13 +1,18 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FavouriteFliesScreen from '~screens/FavouriteFliesScreen';
-import FliesStackNavigator from './FliesStackNavigator';
+import FliesStackNavigator from '~navigators/FliesStackNavigator';
+import { useTheme } from 'react-native-paper';
 
 const Tab = createMaterialBottomTabNavigator();
 
 const MainBottomTabNavigator = () => {
+  const theme = useTheme();
+
   return (
-    <Tab.Navigator initialRouteName="Home">
+    <Tab.Navigator
+      initialRouteName="Home"
+      barStyle={{ backgroundColor: theme.colors.primaryContainer }}>
       <Tab.Screen
         name="Flies"
         component={FliesStackNavigator}

@@ -47,12 +47,6 @@ const FlyDetailsCard: React.FC<Props> = props => {
                 isFavourited={isFavourited}
                 onPress={() => handleToggleIsFavourited()}
               />
-              <IconButton
-                {...p}
-                mode="contained"
-                icon="share-variant-outline"
-                onPress={() => handleShare()}
-              />
             </View>
           )}
         />

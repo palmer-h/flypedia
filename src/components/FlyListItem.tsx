@@ -29,11 +29,7 @@ const FlyListItem: React.FC<Props> = props => {
       title={props.fly.name}
       description={props.fly.description}
       left={listItemProps => (
-        <Avatar.Text
-          style={listItemProps.style}
-          label={props.fly.acronym}
-          size={44}
-        />
+        <Avatar.Icon style={listItemProps.style} icon="hook" size={44} />
       )}
       right={() => (
         <FavouriteToggleButton

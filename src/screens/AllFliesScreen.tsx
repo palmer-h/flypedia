@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import { List, Button, ActivityIndicator } from 'react-native-paper';
@@ -22,6 +22,10 @@ const AllFliesScreen: React.FC<Props> = ({ navigation }) => {
     setIsFetchingPage(true);
     dispatch(fetchPageOfFlies()).finally(() => setIsFetchingPage(false));
   }, [dispatch]);
+
+  useEffect(() => {
+    fetchPage();
+  }, [fetchPage]);
 
   return (
     <ScrollView style={styles.allFliesScreen}>

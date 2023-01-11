@@ -1,52 +1,39 @@
 import { NavigationProp } from '@react-navigation/native';
-import { ScrollView, StyleSheet } from 'react-native';
-import { Button, List } from 'react-native-paper';
-import { useReduxDispatch, useReduxSelector } from '~hooks/redux';
-import FlyListItem from '~components/FlyListItem';
-import { useEffect } from 'react';
-import { fetchPageOfFlies } from '~redux/slices/fliesSlice';
-
+import { StyleSheet, View } from 'react-native';
 interface Props {
   navigation: NavigationProp<any>;
 }
 
 const FliesHomeScreen: React.FC<Props> = ({ navigation }) => {
-  const dispatch = useReduxDispatch();
-  const flies = useReduxSelector(state => state.flies.flies);
-
-  useEffect(() => {
-    dispatch(fetchPageOfFlies());
-  }, [dispatch]);
+  const menuItems = [
+    {
+      id: 1,
+      title: 'All Flies',
+      icon: 'hook',
+      route: 'All Flies',
+    },
+    {
+      id: 2,
+      title: 'Dry Flies',
+      icon: 'hook',
+      route: 'Fly Types',
+    },
+    // etc...
+  ];
 
   return (
-    <ScrollView style={styles.fliesHomeScreen}>
-      <List.Section title="Recently added Flies">
-        {flies.slice(0, 5).map(fly => (
-          <FlyListItem
-            fly={fly}
-            key={fly.id}
-            onPress={() =>
-              navigation.navigate('Fly', { id: fly.id, name: fly.name })
-            }
-          />
-        ))}
-        <Button
-          mode="outlined"
-          style={styles.seeAllButton}
-          onPress={() => navigation.navigate('All Flies')}>
-          See all Flies
-        </Button>
-      </List.Section>
-    </ScrollView>
+    <View>
+      
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  fliesHomeScreen: {
-    padding: 12,
+  menuTilesRow: {
+
   },
-  seeAllButton: {
-    marginTop: 12,
+  menuTile: {
+
   },
 });
 
